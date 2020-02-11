@@ -1,0 +1,6 @@
+framework module Pods_shareHouse {
+  umbrella header "Pods-shareHouse-umbrella.h"
+
+  export *
+  module * { export * }
+}
