@@ -126,7 +126,7 @@
 				0D3D991A23EE91F40020F595 /* AppDelegate.swift */,
 				0D3D991C23EE91F40020F595 /* SceneDelegate.swift */,
 				0DA4941123EFCC240048A1BA /* Protocols */,
-				0D3D995823EEA4A10020F595 /* Sigin */,
+				0D3D995823EEA4A10020F595 /* Home */,
 				0D3D992323EE91F50020F595 /* Assets.xcassets */,
 				0D3D992523EE91F50020F595 /* LaunchScreen.storyboard */,
 				0D3D994C23EE94C90020F595 /* GoogleService-Info.plist */,
@@ -162,15 +162,15 @@
 			path = AddView;
 			sourceTree = "<group>";
 		};
-		0D3D995823EEA4A10020F595 /* Sigin */ = {
+		0D3D995823EEA4A10020F595 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0D3D994F23EE9C550020F595 /* AddView */,
-				0DA4941423F10AD30048A1BA /* CustomCell */,
 				0D3D991E23EE91F40020F595 /* ViewController.swift */,
 				0D3D992023EE91F40020F595 /* Main.storyboard */,
+				0DA4941423F10AD30048A1BA /* CustomCell */,
+				0D3D994F23EE9C550020F595 /* AddView */,
 			);
-			path = Sigin;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		0DA4941123EFCC240048A1BA /* Protocols */ = {
