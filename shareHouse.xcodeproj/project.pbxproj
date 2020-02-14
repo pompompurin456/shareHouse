@@ -18,6 +18,9 @@
 		0D3D994D23EE94C90020F595 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D3D994C23EE94C90020F595 /* GoogleService-Info.plist */; };
 		0D3D995523EEA37F0020F595 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3D995423EEA37F0020F595 /* AddViewController.swift */; };
 		0D3D995723EEA3940020F595 /* AddViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D3D995623EEA3940020F595 /* AddViewController.storyboard */; };
+		0D545C8423F669D200915D56 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D545C8323F669D200915D56 /* AddViewModel.swift */; };
+		0D545C8923F6703B00915D56 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D545C8823F6703B00915D56 /* Result.swift */; };
+		0D545C8D23F6781900915D56 /* AddViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D545C8C23F6781900915D56 /* AddViewPresenter.swift */; };
 		0DA4941323EFCC4D0048A1BA /* Instantiatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA4941223EFCC4D0048A1BA /* Instantiatable.swift */; };
 		0DA4941623F10AEE0048A1BA /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA4941523F10AEE0048A1BA /* CustomCell.swift */; };
 		0DA4941823F10B010048A1BA /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DA4941723F10B010048A1BA /* CustomCell.xib */; };
@@ -61,6 +64,9 @@
 		0D3D994C23EE94C90020F595 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D3D995423EEA37F0020F595 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		0D3D995623EEA3940020F595 /* AddViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddViewController.storyboard; sourceTree = "<group>"; };
+		0D545C8323F669D200915D56 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
+		0D545C8823F6703B00915D56 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		0D545C8C23F6781900915D56 /* AddViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewPresenter.swift; sourceTree = "<group>"; };
 		0DA4941223EFCC4D0048A1BA /* Instantiatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instantiatable.swift; sourceTree = "<group>"; };
 		0DA4941523F10AEE0048A1BA /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		0DA4941723F10B010048A1BA /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 			children = (
 				0D3D991A23EE91F40020F595 /* AppDelegate.swift */,
 				0D3D991C23EE91F40020F595 /* SceneDelegate.swift */,
+				0D545C8723F6702500915D56 /* Result */,
 				0DA4941123EFCC240048A1BA /* Protocols */,
 				0D3D995823EEA4A10020F595 /* Home */,
 				0D3D992323EE91F50020F595 /* Assets.xcassets */,
@@ -157,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				0D3D995423EEA37F0020F595 /* AddViewController.swift */,
+				0D545C8C23F6781900915D56 /* AddViewPresenter.swift */,
+				0D545C8323F669D200915D56 /* AddViewModel.swift */,
 				0D3D995623EEA3940020F595 /* AddViewController.storyboard */,
 			);
 			path = AddView;
@@ -171,6 +180,15 @@
 				0D3D994F23EE9C550020F595 /* AddView */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		0D545C8723F6702500915D56 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				0D545C8823F6703B00915D56 /* Result.swift */,
+			);
+			name = Result;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		0DA4941123EFCC240048A1BA /* Protocols */ = {
@@ -411,11 +429,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D545C8923F6703B00915D56 /* Result.swift in Sources */,
 				0D3D995523EEA37F0020F595 /* AddViewController.swift in Sources */,
 				0DA4941623F10AEE0048A1BA /* CustomCell.swift in Sources */,
 				0D3D991F23EE91F40020F595 /* ViewController.swift in Sources */,
 				0DA4941323EFCC4D0048A1BA /* Instantiatable.swift in Sources */,
+				0D545C8423F669D200915D56 /* AddViewModel.swift in Sources */,
 				0D3D991B23EE91F40020F595 /* AppDelegate.swift in Sources */,
+				0D545C8D23F6781900915D56 /* AddViewPresenter.swift in Sources */,
 				0D3D991D23EE91F40020F595 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
