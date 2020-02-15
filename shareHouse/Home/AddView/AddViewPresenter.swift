@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+protocol AddPresenter: class {
+    func userNamePath(name: String)
+}
+
+final class AddViewPresenter: AddPresenter {
+    func userNamePath(name: String) {
+        <#code#>
+    }
+    
+
+}
+
