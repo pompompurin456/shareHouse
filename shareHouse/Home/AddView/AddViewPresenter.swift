@@ -14,7 +14,7 @@ protocol AddPresenter: class {
 
 final class AddViewPresenter: AddPresenter {
     func userNamePath(name: String) {
-        <#code#>
+        
     }
     
 

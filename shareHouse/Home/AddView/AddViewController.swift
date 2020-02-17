@@ -14,7 +14,7 @@ protocol AddView: class {
 }
 
 final class AddViewController: UIViewController, AddView {
-    lazy var presenter: AddPresenter = AddViewPresenter()
+//    lazy var presenter: AddPresenter = AddViewPresenter()
     
     @IBOutlet weak var authenticationButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
@@ -68,7 +68,12 @@ final class AddViewController: UIViewController, AddView {
     
 //    ここはくクラス名を変更の余地があり
     private func userResister() {
-        
+        let alertController = UIAlertController(title: "データーを送信します", message: "ユーザー登録をししますか？", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
+            self.userCreate()
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(cancelAction)
     }
     
     private func isBlankFieldExists() -> Bool {
@@ -76,7 +81,13 @@ final class AddViewController: UIViewController, AddView {
     }
     
     private func setUpButton() {
-        authenticationButton.layer.cornerRadius = 30
+        authenticationButton.layer.cornerRadius = 20
+        authenticationButton.layer.borderWidth = 3
+        authenticationButton.layer.borderColor = UIColor.black.cgColor
+    }
+    
+    private func userCreate() {
+        
     }
     
     private func setNavigationBarButton() {

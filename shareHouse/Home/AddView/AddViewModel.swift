@@ -9,3 +9,27 @@
 import Foundation
 import Firebase
 
+final class AddViewModel {
+    private func signUp(withName name: String, completion: @escaping (Result<(), Error>) -> Void) {
+        if Auth.auth().currentUser != nil {
+            return
+        }
+
+        Auth.auth().signInAnonymously { authDataResult, error in
+            switch Result(authDataResult, error) {
+            case let .success(authDataResult):
+                Document<User>.create(documentID: authDataResult.user.uid, model: .init(name: name)) { result in
+                    switch result {
+                    case .success:
+                        completion(.success(()))
+                    case let .failure(error):
+                        completion(.failure(error))
+                    }
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+}
