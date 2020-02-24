@@ -14,12 +14,10 @@ protocol AddView: class {
 }
 
 final class AddViewController: UIViewController, AddView {
-//    lazy var presenter: AddPresenter = AddViewPresenter()
+    //    lazy var presenter: AddPresenter = AddViewPresenter()
     
     @IBOutlet weak var authenticationButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var mailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,58 +41,46 @@ final class AddViewController: UIViewController, AddView {
             let actionController = UIAlertController(title: "名前を入力してください", message: "登録には１文字以上必要です", preferredStyle: .actionSheet)
             let cancelAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
                 actionController.dismiss(animated: true)
-                actionController.dismiss(animated: true)
             }
             actionController.addAction(cancelAction)
             self.present(actionController, animated: true)
         } else {
-            print("error")
-        }
-    }
-    
-    private func uploadReportTroubleToFirestore() {
-        let alertController = UIAlertController(title: "リクエストを送信", message: "ユーザーを登録しますか？", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        let sendAction = UIAlertAction(title: "送信", style: .default) { _ in
-            self.userResister()
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(sendAction)
-        
-        present(alertController, animated: true)
-    }
-    
-//    ここはくクラス名を変更の余地があり
-    private func userResister() {
-        let alertController = UIAlertController(title: "データーを送信します", message: "ユーザー登録をししますか？", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
             self.userCreate()
+            print("OK")
+        }
+    }
+    //    ここはくクラス名を変更の余地があり
+    private func userCreate() {
+        let alertController = UIAlertController(title: "データーを送信します", message: "ユーザー登録をしますか？", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
+            self.createUserPresent()
         }
         alertController.addAction(cancelAction)
         alertController.addAction(cancelAction)
     }
-    
+
+    private func createUserPresent() {
+//        guard let name = nameTextField.text else { return }
+//        UserManager.shared.signUp(withName: name) { result in
+//            print(result, "result")
+//        }
+    }
+
     private func isBlankFieldExists() -> Bool {
         return nameTextField.text?.count == 0
     }
-    
+
     private func setUpButton() {
         authenticationButton.layer.cornerRadius = 20
         authenticationButton.layer.borderWidth = 3
         authenticationButton.layer.borderColor = UIColor.black.cgColor
     }
-    
-    private func userCreate() {
-        
-    }
-    
+
     private func setNavigationBarButton() {
         let leftButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backViewController))
         navigationItem.leftBarButtonItem = leftButton
     }
-    
+
     @objc private func backViewController() {
         self.dismiss(animated: true, completion: nil)
     }
