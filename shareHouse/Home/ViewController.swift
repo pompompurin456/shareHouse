@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 final class ViewController: UIViewController {
     
@@ -17,14 +18,14 @@ final class ViewController: UIViewController {
         setupNavigationController()
     }
     
+    @objc private func presentAddView() {
+        let addView = AddViewController.instantiate()
+        let nextAddView = UINavigationController(rootViewController: addView)
+        present(nextAddView, animated: true, completion: nil)
+    }
+    
     private func setupNavigationController() {
         let rigthButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.presentAddView))
         navigationItem.rightBarButtonItem = rigthButton
     }
-    
-    @objc private func presentAddView() {
-        let addView = AddViewController.instantiate()
-        navigationController?.pushViewController(addView, animated: false)
-    }
 }
-
