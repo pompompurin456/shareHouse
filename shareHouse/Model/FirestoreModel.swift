@@ -15,11 +15,35 @@ struct Document<T: FirestoreModel> {
     }
     let ref: DocumentReference
     let data: T
+
+    init(snapshot: DocumentSnapshot) {
+        ref = snapshot.reference
+        data = .init(snapshot: snapshot)
+    }
 }
 
-struct User: FirestoreModel {
-    let name: String
-}
 protocol FirestoreModel {
+    associatedtype Field: Hashable & RawRepresentable
+    init(snapshot: DocumentSnapshot)
+    static var collectionRef: CollectionReference { get }
 }
 
+protocol FirestoreModelReadable: FirestoreModel {}
+
+protocol FirestoreModelWritable: FirestoreModel {
+    var writeFields: [Field: Any] { get }
+}
+
+
+extension Document where T: FirestoreModelWritable, T.Field.RawValue == String {
+    static func create(documentId: String? = nil, model: T, completion: @escaping (Result<(), Error>) -> Void) {
+        let documentRef = documentId.map { T.collectionRef.document($0) } ?? T.collectionRef.document()
+        documentRef.setData(model.writeFields.reduce(into: [:]) { $0[$1.key.rawValue] = $1.value }) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+}

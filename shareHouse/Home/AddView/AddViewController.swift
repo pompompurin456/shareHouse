@@ -56,7 +56,6 @@ final class AddViewController: UIViewController, AddView {
                }
                let sendAction = UIAlertAction(title: "送信", style: .default) { _ in
                    self.createUserPresent()
-                print("ユーザに作ろう")
                }
                alertController.addAction(cancelAction)
                alertController.addAction(sendAction)
@@ -65,7 +64,6 @@ final class AddViewController: UIViewController, AddView {
            }
     private func createUserPresent() {
         guard let name = nameTextField.text else { return }
-        print("真名の登録")
         UserManager.shared.signUp(withName: name) { result in
             print(result, "result")
         }

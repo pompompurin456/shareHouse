@@ -19,13 +19,18 @@ final class UserManager {
 
         Auth.auth().signInAnonymously { authDataResult, error in
             switch Result(authDataResult, error) {
+            case let .success(authDataResult):
+                Document<User>.create(documentId: authDataResult.user.uid, model: .init(name: name)) { result in
+                    switch result {
                     case .success:
                         completion(.success(()))
                     case let .failure(error):
                         completion(.failure(error))
                     }
-//            case let .failure(error):
-//                completion(.failure(error))
+                }
+            case let .failure(error):
+                completion(.failure(error))
             }
+        }
     }
 }
