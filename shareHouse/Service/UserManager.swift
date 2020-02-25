@@ -24,6 +24,7 @@ final class UserManager {
                     switch result {
                     case .success:
                         completion(.success(()))
+                        print("completion", completion)
                     case let .failure(error):
                         completion(.failure(error))
                     }

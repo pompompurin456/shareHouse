@@ -27,6 +27,7 @@
 		0DA4941823F10B010048A1BA /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DA4941723F10B010048A1BA /* CustomCell.xib */; };
 		0DF74DD22403A7ED00FA2110 /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF74DD12403A7ED00FA2110 /* FirestoreError.swift */; };
 		0DF74DD52404B97200FA2110 /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF74DD42404B97200FA2110 /* FirestoreModel.swift */; };
+		0DF74DD72404F37F00FA2110 /* DocumentSnapshot+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF74DD62404F37F00FA2110 /* DocumentSnapshot+.swift */; };
 		2C1190631E88803A34585EB3 /* Pods_shareHouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A1F27640D85E147760FDD5 /* Pods_shareHouse.framework */; };
 		847D8BCDE0C4E594EA68A4C3 /* Pods_shareHouseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BFC00F962CD03E44F25EB50 /* Pods_shareHouseTests.framework */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,7 @@
 		0DA4941723F10B010048A1BA /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		0DF74DD12403A7ED00FA2110 /* FirestoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreError.swift; sourceTree = "<group>"; };
 		0DF74DD42404B97200FA2110 /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
+		0DF74DD62404F37F00FA2110 /* DocumentSnapshot+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentSnapshot+.swift"; sourceTree = "<group>"; };
 		2769CBE95D12D0BFE8391F32 /* Pods-shareHouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shareHouse.release.xcconfig"; path = "Target Support Files/Pods-shareHouse/Pods-shareHouse.release.xcconfig"; sourceTree = "<group>"; };
 		4CE005D333319C08FEB5C193 /* Pods-shareHouseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shareHouseTests.debug.xcconfig"; path = "Target Support Files/Pods-shareHouseTests/Pods-shareHouseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A56F2B83B577520E22C43F97 /* Pods-shareHouseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shareHouseTests.release.xcconfig"; path = "Target Support Files/Pods-shareHouseTests/Pods-shareHouseTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				0D545C9023F7FD5700915D56 /* User.swift */,
+				0DF74DD62404F37F00FA2110 /* DocumentSnapshot+.swift */,
 			);
 			name = Entity;
 			path = ..;
@@ -473,6 +476,7 @@
 				0D3D991B23EE91F40020F595 /* AppDelegate.swift in Sources */,
 				0D545C9123F7FD5700915D56 /* User.swift in Sources */,
 				0D7273E123FEC86C00B393C8 /* UserDefault.swift in Sources */,
+				0DF74DD72404F37F00FA2110 /* DocumentSnapshot+.swift in Sources */,
 				0D3D991D23EE91F40020F595 /* SceneDelegate.swift in Sources */,
 				0DF74DD52404B97200FA2110 /* FirestoreModel.swift in Sources */,
 			);
