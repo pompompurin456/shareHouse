@@ -25,18 +25,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="メールアドレス" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IUX-MA-HIY" customClass="CustomTextField" customModule="shareHouse" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="87" width="398" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="パスワード" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dRC-LV-UNQ" customClass="CustomTextField" customModule="shareHouse" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="146" width="398" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -68,9 +56,7 @@
                     </view>
                     <connections>
                         <outlet property="authenticationButton" destination="RCc-Hv-gFT" id="qDl-kv-sgg"/>
-                        <outlet property="mailTextField" destination="IUX-MA-HIY" id="dbz-Mb-a5S"/>
                         <outlet property="nameTextField" destination="fB8-vz-Z9T" id="pre-J0-5h9"/>
-                        <outlet property="passwordTextField" destination="dRC-LV-UNQ" id="T6f-7S-DtY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQi-X4-wv3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+public enum FirestoreError: Error {
+    case writingFailed
+    case other
+}

@@ -35,7 +35,7 @@ final class AddViewController: UIViewController, AddView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
+
     @IBAction func authenticationButtonTapped(_ sender: Any) {
         if isBlankFieldExists() {
             let actionController = UIAlertController(title: "名前を入力してください", message: "登録には１文字以上必要です", preferredStyle: .actionSheet)
@@ -46,24 +46,29 @@ final class AddViewController: UIViewController, AddView {
             self.present(actionController, animated: true)
         } else {
             self.userCreate()
-            print("OK")
         }
-    }
-    //    ここはくクラス名を変更の余地があり
-    private func userCreate() {
-        let alertController = UIAlertController(title: "データーを送信します", message: "ユーザー登録をしますか？", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
-            self.createUserPresent()
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(cancelAction)
     }
 
+    private func userCreate() {
+         let alertController = UIAlertController(title: "名前を送信", message: "ユーザーを登録しますか？？", preferredStyle: .alert)
+               let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
+                   alertController.dismiss(animated: true, completion: nil)
+               }
+               let sendAction = UIAlertAction(title: "送信", style: .default) { _ in
+                   self.createUserPresent()
+                print("ユーザに作ろう")
+               }
+               alertController.addAction(cancelAction)
+               alertController.addAction(sendAction)
+
+               present(alertController, animated: true)
+           }
     private func createUserPresent() {
-//        guard let name = nameTextField.text else { return }
-//        UserManager.shared.signUp(withName: name) { result in
-//            print(result, "result")
-//        }
+        guard let name = nameTextField.text else { return }
+        print("真名の登録")
+        UserManager.shared.signUp(withName: name) { result in
+            print(result, "result")
+        }
     }
 
     private func isBlankFieldExists() -> Bool {
