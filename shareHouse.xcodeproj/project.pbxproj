@@ -139,6 +139,7 @@
 			children = (
 				0D3D991A23EE91F40020F595 /* AppDelegate.swift */,
 				0D3D991C23EE91F40020F595 /* SceneDelegate.swift */,
+				0DF74DD8240507FA00FA2110 /* Extension */,
 				0D545C8F23F7FD4400915D56 /* Entity */,
 				0D7273DF23FEC85300B393C8 /* Model */,
 				0DF74DD32403A8AB00FA2110 /* Service */,
@@ -205,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				0D545C9023F7FD5700915D56 /* User.swift */,
-				0DF74DD62404F37F00FA2110 /* DocumentSnapshot+.swift */,
 			);
 			name = Entity;
 			path = ..;
@@ -243,6 +243,14 @@
 				0D545C8323F669D200915D56 /* UserManager.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		0DF74DD8240507FA00FA2110 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0DF74DD62404F37F00FA2110 /* DocumentSnapshot+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		2CE9A9AF9B93D10FB1746F82 /* Frameworks */ = {

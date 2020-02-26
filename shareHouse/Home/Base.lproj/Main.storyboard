@@ -24,6 +24,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3D-t9-vbI">
+                                <rect key="frame" x="321" y="118" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="洗濯機" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d17-hE-KkH">
                                 <rect key="frame" x="47" y="468" width="55.5" height="21"/>
                                 <constraints>
@@ -33,6 +37,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZi-gr-Fgn">
+                                <rect key="frame" x="321" y="468" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qx1-Mt-CQq">
                                 <rect key="frame" x="47" y="160" width="320" height="283"/>
                                 <subviews>
@@ -71,10 +79,12 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qx1-Mt-CQq" firstAttribute="top" secondItem="Qtm-7d-RqZ" secondAttribute="bottom" constant="21" id="1AI-uS-bYL"/>
+                            <constraint firstItem="yZi-gr-Fgn" firstAttribute="top" secondItem="d17-hE-KkH" secondAttribute="top" id="2tf-CK-nUF"/>
                             <constraint firstItem="d17-hE-KkH" firstAttribute="leading" secondItem="Qtm-7d-RqZ" secondAttribute="leading" id="IEO-Am-4XM"/>
                             <constraint firstItem="qx1-Mt-CQq" firstAttribute="leading" secondItem="Qtm-7d-RqZ" secondAttribute="leading" id="Olm-t4-Pra"/>
                             <constraint firstItem="Qtm-7d-RqZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="47" id="Ryf-hl-52q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bfE-Xo-fKk" secondAttribute="bottom" constant="69" id="ZSz-P0-wAo"/>
+                            <constraint firstItem="J3D-t9-vbI" firstAttribute="trailing" secondItem="qx1-Mt-CQq" secondAttribute="trailing" id="bNd-ZD-J0j"/>
                             <constraint firstItem="d17-hE-KkH" firstAttribute="top" secondItem="qx1-Mt-CQq" secondAttribute="bottom" constant="25" id="biA-ac-8o7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qx1-Mt-CQq" secondAttribute="trailing" constant="47" id="bkl-rg-TMu"/>
                             <constraint firstItem="bfE-Xo-fKk" firstAttribute="height" secondItem="qx1-Mt-CQq" secondAttribute="height" id="cPq-Rb-m8s"/>
@@ -83,7 +93,9 @@
                             <constraint firstItem="d17-hE-KkH" firstAttribute="trailing" secondItem="Qtm-7d-RqZ" secondAttribute="trailing" id="iQK-qQ-v4d"/>
                             <constraint firstItem="bfE-Xo-fKk" firstAttribute="trailing" secondItem="qx1-Mt-CQq" secondAttribute="trailing" id="iXP-w1-yUU"/>
                             <constraint firstItem="bfE-Xo-fKk" firstAttribute="top" secondItem="d17-hE-KkH" secondAttribute="bottom" constant="21" id="mua-Bd-Cba"/>
+                            <constraint firstItem="yZi-gr-Fgn" firstAttribute="trailing" secondItem="bfE-Xo-fKk" secondAttribute="trailing" id="nNp-dw-dTh"/>
                             <constraint firstItem="bfE-Xo-fKk" firstAttribute="leading" secondItem="Qtm-7d-RqZ" secondAttribute="leading" id="rlw-92-apy"/>
+                            <constraint firstItem="J3D-t9-vbI" firstAttribute="top" secondItem="Qtm-7d-RqZ" secondAttribute="top" id="t6X-DH-d5A"/>
                             <constraint firstItem="qx1-Mt-CQq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="veB-P2-WcV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
