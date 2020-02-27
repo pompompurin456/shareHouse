@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
-final class CustomCell: UITableViewCell {
-    
+final class NameCell: UITableViewCell, CellReusable {
+    @IBOutlet weak var nameLavel: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
 }
