@@ -9,27 +9,12 @@
 import Foundation
 import Firebase
 
-struct User: FirestoreModelReadable, FirestoreModelWritable {
-    
-    enum  Field: String {
-        case name
-    }
+struct User: Codable {
+    let name: String
+    let firebaseUid: String
 
-    static var collectionRef: CollectionReference {
-        return Firestore.firestore().collection("user")
-    }
-
-    var name: String = ""
-
-    init(snapshot: DocumentSnapshot) {
-        name = snapshot.stringValue(forKey: Field.name, default: "")
-    }
-
-    init(name: String) {
+    init(name: String, firebaseUid: String) {
         self.name = name
-    }
-
-    var writeFields: [User.Field : Any] {
-        return [.name: name]
+        self.firebaseUid = firebaseUid
     }
 }

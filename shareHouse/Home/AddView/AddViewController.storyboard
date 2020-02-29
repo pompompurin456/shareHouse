@@ -47,7 +47,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="authenticationButtonTapped:" destination="p4n-UB-uiu" eventType="touchUpInside" id="3fu-XV-BsV"/>
+                                    <action selector="registerButtonTapped:" destination="p4n-UB-uiu" eventType="touchUpInside" id="YWv-sZ-gr6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -55,8 +55,8 @@
                         <viewLayoutGuide key="safeArea" id="0NI-uc-jGR"/>
                     </view>
                     <connections>
-                        <outlet property="authenticationButton" destination="RCc-Hv-gFT" id="qDl-kv-sgg"/>
-                        <outlet property="nameTextField" destination="fB8-vz-Z9T" id="pre-J0-5h9"/>
+                        <outlet property="authenticationButton" destination="RCc-Hv-gFT" id="nCg-Fa-k1c"/>
+                        <outlet property="nameTextField" destination="fB8-vz-Z9T" id="bQ3-Mm-nIw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQi-X4-wv3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

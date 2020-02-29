@@ -23,7 +23,7 @@ final class MyHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(customBackgroundView)
         customBackgroundView.addSubview(label)
 
-        label.textColor = .blue
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         NSLayoutConstraint.activate([

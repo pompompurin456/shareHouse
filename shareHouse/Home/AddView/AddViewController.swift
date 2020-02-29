@@ -11,89 +11,70 @@ import UIKit
 import Firebase
 
 protocol AddView: class {
+    func dismissSignIn(with user: User)
+    func showCreateUserFailedAlert()
 }
 
 final class AddViewController: UIViewController, AddView {
-    //    lazy var presenter: AddPresenter = AddViewPresenter()
+    lazy var presenter: AddPresenter = AddViewPresenter(view: self)
     
     @IBOutlet weak var authenticationButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "登録画面"
+        title = "君の名は"
         
-        setUpButton()
-        setNavigationBarButton()
-        
-        nameTextField.delegate = self
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        setUoTextField()
     }
 
-    //    ここのアラートの処理は共有化することができる
-    @IBAction func authenticationButtonTapped(_ sender: Any) {
-        if isBlankFieldExists() {
-            let actionController = UIAlertController(title: "名前を入力してください", message: "登録には１文字以上必要です", preferredStyle: .actionSheet)
-            let cancelAction = UIAlertAction(title: "OK", style: .cancel) { (action) in
-                actionController.dismiss(animated: true)
-            }
-            actionController.addAction(cancelAction)
-            self.present(actionController, animated: true)
-        } else {
-            self.userCreate()
+    @IBAction func registerButtonTapped(_ sender: UIButton) {
+        guard let userName = nameTextField.text else {
+            self.showBlankAlert()
+            return
+        }
+        presenter.registerUser(name: userName)
+//        dismiss(animated: true)
+    }
+
+    func setUoTextField() {
+        nameTextField.attributedPlaceholder = NSAttributedString(string: "ニックネームを入力")
+        nameTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: .editingChanged)
+    }
+
+    @objc func textFieldDidChange() {
+        if nameTextField.text != "" {
+            authenticationButton.backgroundColor = UIColor.black
+            authenticationButton.layer.borderColor = UIColor.white.cgColor
+            authenticationButton.isEnabled = true
         }
     }
 
-    //    ここのアラートの処理は共有化することができる
-    private func userCreate() {
-        let alertController = UIAlertController(title: "名前を送信", message: "ユーザーを登録しますか？？", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
-            alertController.dismiss(animated: true, completion: nil)
+//    アラート部分のコードの共通化をおこなうことが大切（参考にするものがたくさんある）
+    func showBlankAlert() {
+        let alertController = UIAlertController(title: "エラー", message: "未入力の項目があります。\n入力内容をご確認ください。", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { action in
+            alertController.dismiss(animated: true)
         }
-        let sendAction = UIAlertAction(title: "送信", style: .default) { _ in
-            self.createUserPresent()
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(sendAction)
 
-        present(alertController, animated: true)
-    }
-    private func createUserPresent() {
-        guard let name = nameTextField.text else { return }
-        UserManager.shared.signUp(withName: name) { result in
-            print(result, "result")
-        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 
-    private func isBlankFieldExists() -> Bool {
-        return nameTextField.text?.count == 0
-    }
 
-    private func setUpButton() {
-        authenticationButton.layer.cornerRadius = 20
-        authenticationButton.layer.borderWidth = 3
-        authenticationButton.layer.borderColor = UIColor.black.cgColor
-    }
-
-    private func setNavigationBarButton() {
-        let leftButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backViewController))
-        navigationItem.leftBarButtonItem = leftButton
-    }
-
-    @objc private func backViewController() {
+    func dismissSignIn(with user: User) {
         self.dismiss(animated: true, completion: nil)
     }
-}
 
-extension AddViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    func showCreateUserFailedAlert() {
+        let alertController = UIAlertController(title: "エラー", message: "ユーザー登録できませんでした。\n入力内容を確認し、何度も登録に失敗する場合は時間をおいて再度お試しください。", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { action in
+            alertController.dismiss(animated: true)
+        }
+
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 }
