@@ -12,16 +12,16 @@ struct UserData {
     static let userDefault = Foundation.UserDefaults.standard
 
     struct Key {
-        static let ID = "ID"
+        static let Name = "Name"
     }
 }
 
 extension UserData {
-    static var ID: String? {
+    static var Name: String? {
         get {
-            return userDefault.string(forKey: Key.ID) ?? nil
+            return userDefault.string(forKey: Key.Name) ?? nil
         } set {
-            userDefault.set(newValue, forKey: Key.ID)
+            userDefault.set(newValue, forKey: Key.Name)
             userDefault.synchronize()
         }
     }

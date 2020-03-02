@@ -9,6 +9,8 @@
 import Foundation
 
 public enum FirestoreError: Error {
+    case documentDuplicated
+    case documentNotFound
     case writingFailed
     case other
 }

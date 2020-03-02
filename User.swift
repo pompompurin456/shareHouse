@@ -6,3 +6,15 @@
 //  Copyright © 2020 okuda ryuya. All rights reserved.
 //
 
+import Foundation
+import Firebase
+
+struct User: Codable {
+    let name: String
+    let firebaseUid: String
+
+    init(name: String, firebaseUid: String) {
+        self.name = name
+        self.firebaseUid = firebaseUid
+    }
+}
