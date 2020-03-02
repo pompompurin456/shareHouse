@@ -14,15 +14,43 @@ final class UserService {
     let db = Firestore.firestore()
 
     func createUser(user: User, completion: @escaping (Result<Bool, FirestoreError>) -> Void) {
-        Auth.auth().signInAnonymously() { (authResult, error) in
-            let docData = try! Firestore.Encoder().encode(user)
+        let docData = try! Firestore.Encoder().encode(user)
 
-            self.db.collection("user").addDocument(data: docData) { error in
-                if error != nil {
-                    completion(.failure(.writingFailed))
-                    return
+        //        できたけどこれでいいのかな？？もっとかっこいいやり方があるような気がある。
+        Auth.auth().signInAnonymously()
+        self.db.collection("user").addDocument(data: docData) { error in
+            if error != nil {
+                completion(.failure(.writingFailed))
+                return
+            }
+        }
+
+        completion(.success(true))
+    }
+
+    func getUser(firUid: String, completion: @escaping (Result<User, FirestoreError>) -> Void) {
+        db.collection("user").whereField("firebaseUid", isEqualTo: firUid).getDocuments { snapshot, error in
+            if error != nil {
+                completion(.failure(.other))
+                return
+            }
+
+            if let snapshot = snapshot {
+                switch snapshot.documents.count {
+                case 0:
+                    completion(.failure(.documentNotFound))
+                case 1:
+                    let data = snapshot.documents.first!.data()
+                    let user = try! Firestore.Decoder().decode(User.self, from: data)
+                    completion(.success(user))
+                    print("completion", completion)
+                default:
+                    completion(.failure(.documentDuplicated))
                 }
+            } else {
+                completion(.failure(.documentNotFound))
             }
         }
     }
 }
+

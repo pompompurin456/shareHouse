@@ -34,7 +34,8 @@ final class AddViewController: UIViewController, AddView {
             return
         }
         presenter.registerUser(name: userName)
-//        dismiss(animated: true)
+        print("押されたよ")
+        //        dismiss(animated: true)
     }
 
     func setUoTextField() {
@@ -50,7 +51,7 @@ final class AddViewController: UIViewController, AddView {
         }
     }
 
-//    アラート部分のコードの共通化をおこなうことが大切（参考にするものがたくさんある）
+    //    アラート部分のコードの共通化をおこなうことが大切（参考にするものがたくさんある）
     func showBlankAlert() {
         let alertController = UIAlertController(title: "エラー", message: "未入力の項目があります。\n入力内容をご確認ください。", preferredStyle: .alert)
 
@@ -61,10 +62,10 @@ final class AddViewController: UIViewController, AddView {
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
     }
-
-
+    
     func dismissSignIn(with user: User) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true)
+        print("できているよ")
     }
 
     func showCreateUserFailedAlert() {

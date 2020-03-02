@@ -30,6 +30,7 @@ final class AddViewPresenter: AddPresenter {
             )
 
             userService.createUser(user: firestoreUser) { result in
+                print("result", result)
                 switch result {
                 case .success(_):
                     self.view?.dismissSignIn(with: firestoreUser)
@@ -42,3 +43,4 @@ final class AddViewPresenter: AddPresenter {
         }
     }
 }
+
