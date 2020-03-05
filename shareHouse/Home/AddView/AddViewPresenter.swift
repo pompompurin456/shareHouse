@@ -22,24 +22,32 @@ final class AddViewPresenter: AddPresenter {
     }
 
     func registerUser(name: String) {
-        if let user = Auth.auth().currentUser {
-            let uid = user.uid
-            let firestoreUser = User.init(
-                name: name,
-                firebaseUid: uid
-            )
+//        ここもっといい書き方がしたい。。。（抽象化したいんご）　＆　ユーザーが登録されていた場合の処理に関しても考えることが必要である。case文にしたい。。。
+        if Auth.auth().currentUser == nil {
+            Auth.auth().signInAnonymously() { authResult, error in
+                if let user = Auth.auth().currentUser {
+                    let uid = user.uid
+                    let firestoreUser = User.init(
+                        name: name,
+                        firebaseUid: uid,
+                        activeBath: false,
+                        activeWath: false
+                    )
 
-            userService.createUser(user: firestoreUser) { result in
-                print("result", result)
-                switch result {
-                case .success(_):
-                    self.view?.dismissSignIn(with: firestoreUser)
-                case .failure(_):
+                    self.userService.createUser(user: firestoreUser) { result in
+                        switch result {
+                        case .success(_):
+                            self.view?.dismissSignIn(with: firestoreUser)
+                        case .failure(_):
+                            self.view?.showCreateUserFailedAlert()
+                        }
+                    }
+                } else {
                     self.view?.showCreateUserFailedAlert()
                 }
             }
-        } else {
-            self.view?.showCreateUserFailedAlert()
+        } else if Auth.auth().currentUser != nil {
+            print("もうおるで")
         }
     }
 }
