@@ -8,14 +8,17 @@
 
 import Foundation
 
-public extension Result {
-    init(_ success: Success?, _ failure: Failure?) {
-        if let success = success {
-            self = .success(success)
-        } else if let failure = failure {
-            self = .failure(failure)
-        } else {
-            fatalError("Illegal combination found.\n Success: \(success as Any), Failure: \(failure as Any)")
-        }
+import Foundation
+
+public enum Result<Value, Error> {
+    case success(Value)
+    case failure(Error)
+
+    public init(value: Value) {
+        self = .success(value)
+    }
+
+    public init(error: Error) {
+        self = .failure(error)
     }
 }
