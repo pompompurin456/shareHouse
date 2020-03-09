@@ -10,7 +10,10 @@ import Foundation
 import FirebaseAuth
 
 protocol HomePresenter: class {
-    func updateActiveBathUser(isActiveBath: Bool)
+    func setUserName()
+    func createBathActiveUser(userName: String)
+    func createWathActiveUser(userName: String)
+    var sections: [String] { get }
 }
 
 enum HomeTableViewActiveCellType: Int {
@@ -21,37 +24,51 @@ enum HomeTableViewActiveCellType: Int {
 final class HomeViewPresenter: HomePresenter {
 
     private weak var view: HomeView?
+    let sections = ["お風呂", "洗濯機"]
     private var userService = UserService()
+    private var activeUserService = ActiveUserService()
     var me: User?
 
     init(view: HomeView) {
         self.view = view
     }
 
-    func updateActiveBathUser(isActiveBath: Bool) {
-        guard let firUser = Auth.auth().currentUser else { return }
-        userService.updateActiveBath(firUid: firUser.uid, isActiveBath: isActiveBath) { result in
+    func createBathActiveUser(userName: String) {
+        let activeBathUser = ActiveBathUser(name: userName)
+        self.activeUserService.createActiveBathUser(isActiveUser: activeBathUser, completion: { result in
             switch result {
-            case .success(_):
-                self.view?.showSuccesUpdateAlert()
-                print("Bathok")
-            case .failure(_):
-                self.view?.showEroorUpdateAlert()
-                print("can not updateBath")
+            case .success:
+                // TODO:　アラートの処理を追加すること
+                print("できてるよ")
+            case .failure:
+                print("Failed to update")
             }
-        }
+        })
     }
 
-    func updateActiveWath(isActiveWath: Bool) {
-        guard let firUser = Auth.auth().currentUser else { return }
-        userService.updateActiveWath(firUid: firUser.uid, isActiveWath: isActiveWath) { result in
+    func createWathActiveUser(userName: String) {
+        let activeWathUser = ActiveBathUser(name: userName)
+        self.activeUserService.createActiveWathUser(isActiveUser: activeWathUser, completion: { result in
             switch result {
-            case .success(_):
+            case .success:
+                // TODO:　アラートの処理を追加すること
+                print("できているohuro")
+            case .failure:
+                print("Failed to update")
+            }
+        })
+    }
+
+
+    func setUserName() {
+        guard let firUser = Auth.auth().currentUser else { return }
+        userService.getUser(firUid: firUser.uid) { result in
+            switch result {
+            case .success(let user):
+                // TODO:　アラートの処理を追加すること
+                UserData.Name = user.name
+            case .failure:
                 self.view?.showEroorUpdateAlert()
-                print("WathOK")
-            case .failure(_):
-                self.view?.showEroorUpdateAlert()
-                print("can not updateWath")
             }
         }
     }

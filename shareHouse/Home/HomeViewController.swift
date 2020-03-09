@@ -20,7 +20,6 @@ final class HomeViewController: UIViewController, HomeView {
     
     @IBOutlet weak var mainTableView: UITableView!
 
-    private let sectionTitle = ["お風呂", "洗濯機"]
     private let userService = UserService()
 
     override func viewDidLoad() {
@@ -85,44 +84,28 @@ extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! MyHeaderView
-        header.apply(text: sectionTitle[section])
+        header.label.text = presenter.sections[section]
         return header
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            presenter.updateActiveBathUser(isActiveBath: true)
-            print("お風呂")
-        case 1:
-            presenter.updateActiveBathUser(isActiveBath: true)
-            print("洗濯機")
-        default:
-            break
-        }
-        //        guard let firUser = Auth.auth().currentUser else { return }
-        //        userService.getUserName(firUid: firUser.uid) { result in
-        //            switch result {
-        //            case .success(let user):
-        //                let alertController = UIAlertController(title: "君の名は", message: "あなたは\(user.name)ですか？", preferredStyle: .alert)
-        //                let okAction = UIAlertAction(title: "YES", style: .default) { action in
-        //                    alertController.dismiss(animated: true)
-        //                }
-        //
-        //                alertController.addAction(okAction)
-        //                self.present(alertController, animated: true)
-        //
-        //            case .failure:
-        //           ここの処理は書き換えるふ必要がある（ユーザの認証が成功している中に入り込んでいるため希望の処理を実行しることができない。）
-        //                let alertController = UIAlertController(title: "エラー", message: "登録されていません", preferredStyle: .alert)
-        //                let okAction = UIAlertAction(title: "かしこまりました", style: .default) { action in
-        //                    alertController.dismiss(animated: true)
-        //                }
-        //
-        //                alertController.addAction(okAction)
-        //                self.present(alertController, animated: true)
-        //            }
+// TODO: 処理の流れが良くないので作り変える必要がある
+        if UserData.Name == nil {
+            presenter.setUserName()
 
+        } else if UserData.Name != nil {
+
+            switch indexPath.section {
+            case 0:
+                guard let username = UserData.Name else { return }
+                presenter.createBathActiveUser(userName: username)
+            case 1:
+                guard let username = UserData.Name else { return }
+                presenter.createWathActiveUser(userName: username)
+            default:
+                break
+            }
+        }
     }
 }
 
