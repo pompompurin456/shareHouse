@@ -35,7 +35,6 @@ final class AddViewController: UIViewController, AddView {
         }
         presenter.registerUser(name: userName)
         print("押されたよ")
-        //        dismiss(animated: true)
     }
 
     func setUoTextField() {

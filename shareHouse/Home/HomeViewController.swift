@@ -10,11 +10,16 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
-final class ViewController: UIViewController {
+protocol HomeView: class {
+    func showSuccesUpdateAlert()
+    func showEroorUpdateAlert()
+}
+
+final class HomeViewController: UIViewController, HomeView {
+    lazy var presenter: HomePresenter = HomeViewPresenter(view: self)
     
     @IBOutlet weak var mainTableView: UITableView!
 
-    private let sectionTitle = ["お風呂", "洗濯機"]
     private let userService = UserService()
 
     override func viewDidLoad() {
@@ -43,9 +48,27 @@ final class ViewController: UIViewController {
         mainTableView.register(MyHeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
         mainTableView.tableFooterView = UIView()
     }
+
+    func showSuccesUpdateAlert() {
+        let alertController = UIAlertController(title: "送信完了", message: "更新されました。", preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "了解", style: .default) { action in
+            alertController.dismiss(animated: true)
+        }
+        alertController.addAction(doneAction)
+        self.present(alertController, animated: true)
+    }
+
+    func showEroorUpdateAlert() {
+        let alertController = UIAlertController(title: "送信失敗", message: "更新されませんでした。", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "了解", style: .default) { action in
+            alertController.dismiss(animated: true)
+        }
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true)
+    }
 }
 
-extension ViewController: UITableViewDelegate {
+extension HomeViewController: UITableViewDelegate {
     //ここのメソッド部分の認識が甘いから制御しているのかを考えて効果的に使っていくこと！！（特に高さに関する部分）
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44.0
@@ -61,38 +84,32 @@ extension ViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! MyHeaderView
-        header.apply(text: sectionTitle[section])
+        header.label.text = presenter.sections[section]
         return header
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let firUser = Auth.auth().currentUser else { return }
-        userService.getUser(firUid: firUser.uid) { result in
-            switch result {
-            case .success(let user):
-                let alertController = UIAlertController(title: "君の名は", message: "あなたは\(user.name)ですか？", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "YES", style: .default) { action in
-                    alertController.dismiss(animated: true)
-                }
+// TODO: 処理の流れが良くないので作り変える必要がある
+        if UserData.Name == nil {
+            presenter.setUserName()
 
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true)
+        } else if UserData.Name != nil {
 
-            case .failure:
-                let alertController = UIAlertController(title: "エラー", message: "登録されていません", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "かしこまりました", style: .default) { action in
-                    alertController.dismiss(animated: true)
-                }
-
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true)
+            switch indexPath.section {
+            case 0:
+                guard let username = UserData.Name else { return }
+                presenter.createBathActiveUser(userName: username)
+            case 1:
+                guard let username = UserData.Name else { return }
+                presenter.createWathActiveUser(userName: username)
+            default:
+                break
             }
-
         }
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
