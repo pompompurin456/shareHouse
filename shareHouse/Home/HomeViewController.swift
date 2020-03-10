@@ -89,22 +89,14 @@ extension HomeViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-// TODO: 処理の流れが良くないので作り変える必要がある
-        if UserData.Name == nil {
-            presenter.setUserName()
-
-        } else if UserData.Name != nil {
-
-            switch indexPath.section {
-            case 0:
-                guard let username = UserData.Name else { return }
-                presenter.createBathActiveUser(userName: username)
-            case 1:
-                guard let username = UserData.Name else { return }
-                presenter.createWathActiveUser(userName: username)
-            default:
-                break
-            }
+        // TODO: 処理の流れが良くないので作り変える必要がある
+        switch indexPath.section {
+        case 0:
+            presenter.makeBathActiveUser()
+        case 1:
+            presenter.makeWathActiveUser()
+        default:
+            break
         }
     }
 }
