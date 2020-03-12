@@ -13,6 +13,7 @@ import FirebaseAuth
 protocol HomeView: class {
     func showSuccesUpdateAlert()
     func showEroorUpdateAlert()
+    func reloadTable()
 }
 
 final class HomeViewController: UIViewController, HomeView {
@@ -28,6 +29,8 @@ final class HomeViewController: UIViewController, HomeView {
         title = "Home"
         setupNavigationController()
         setUpTableView()
+        presenter.displayBathActiveUser()
+        presenter.displayWathActiveUser()
     }
     
     @objc private func presentAddView() {
@@ -47,6 +50,12 @@ final class HomeViewController: UIViewController, HomeView {
         mainTableView.register(cellType: NameCell.self)
         mainTableView.register(MyHeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
         mainTableView.tableFooterView = UIView()
+    }
+
+    func reloadTable() {
+        DispatchQueue.main.async {
+            self.mainTableView.reloadData()
+        }
     }
 
     func showSuccesUpdateAlert() {
@@ -89,29 +98,20 @@ extension HomeViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-// TODO: 処理の流れが良くないので作り変える必要がある
-        if UserData.Name == nil {
-            presenter.setUserName()
-
-        } else if UserData.Name != nil {
-
-            switch indexPath.section {
-            case 0:
-                guard let username = UserData.Name else { return }
-                presenter.createBathActiveUser(userName: username)
-            case 1:
-                guard let username = UserData.Name else { return }
-                presenter.createWathActiveUser(userName: username)
-            default:
-                break
-            }
+        switch indexPath.section {
+        case 0:
+            presenter.makeBathActiveUser()
+        case 1:
+            presenter.makeWathActiveUser()
+        default:
+            break
         }
     }
 }
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -120,6 +120,18 @@ extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(with: NameCell.self, for: indexPath)
-        return cell
+        switch indexPath.section {
+        case 0:
+            if let isActiveBathUsers = presenter.isActiveBathUser {
+                cell.setData(name: isActiveBathUsers[indexPath.row].name)
+            }
+        case 1:
+            if let isActiveWathUser = presenter.isActiveWathUser {
+                cell.setData(name: isActiveWathUser[indexPath.row].name)
+            }
+        default:
+            break
+        }
+         return cell
     }
 }

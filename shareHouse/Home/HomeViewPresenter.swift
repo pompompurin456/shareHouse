@@ -11,9 +11,13 @@ import FirebaseAuth
 
 protocol HomePresenter: class {
     func setUserName()
-    func createBathActiveUser(userName: String)
-    func createWathActiveUser(userName: String)
+    func makeBathActiveUser()
+    func makeWathActiveUser()
+    func displayBathActiveUser()
+    func displayWathActiveUser()
     var sections: [String] { get }
+    var isActiveBathUser: [ActiveBathUser]? { get }
+    var isActiveWathUser: [ActiveWathUser]? { get }
 }
 
 enum HomeTableViewActiveCellType: Int {
@@ -28,26 +32,77 @@ final class HomeViewPresenter: HomePresenter {
     private var userService = UserService()
     private var activeUserService = ActiveUserService()
     var me: User?
+    var isActiveWathUser: [ActiveWathUser]?
+    var isActiveBathUser: [ActiveBathUser]?
 
     init(view: HomeView) {
         self.view = view
     }
 
-    func createBathActiveUser(userName: String) {
-        let activeBathUser = ActiveBathUser(name: userName)
+    func displayBathActiveUser() {
+        activeUserService.getActiveBathUserReF(/*limit: 5,*/ completion: { result in
+            switch result {
+            case .success(let isActiveUser):
+                self.isActiveBathUser = isActiveUser
+                self.view?.reloadTable()
+                print(result, "result")
+            case .failure:
+                print("何様？？")
+            }
+        })
+    }
+
+    func displayWathActiveUser() {
+        activeUserService.getActiveWathUser(completiom: { result in
+            switch result {
+            case .success(let isActiveUser):
+                self.isActiveWathUser = isActiveUser
+                self.view?.reloadTable()
+            case .failure:
+                print("ふざけるな")
+            }
+        })
+    }
+
+    func makeWathActiveUser() {
+        guard let firUser = Auth.auth().currentUser else { return }
+        userService.getUser(firUid: firUser.uid) { result in
+            switch result {
+            case .success(let user):
+                self.createWathActiveUser(user: user)
+            case .failure:
+                print("error")
+            }
+        }
+    }
+
+    func makeBathActiveUser() {
+        guard let firUser = Auth.auth().currentUser else { return }
+        userService.getUser(firUid: firUser.uid) { result in
+            switch result {
+            case .success(let user):
+                self.createBathActiveUser(user: user)
+            case .failure:
+                print("NO")
+            }
+        }
+    }
+
+    private func createBathActiveUser(user: User) {
+        let activeBathUser = ActiveBathUser(name: user.name)
         self.activeUserService.createActiveBathUser(isActiveUser: activeBathUser, completion: { result in
             switch result {
             case .success:
                 // TODO:　アラートの処理を追加すること
-                print("できてるよ")
+                print("result", result)
             case .failure:
                 print("Failed to update")
             }
         })
     }
 
-    func createWathActiveUser(userName: String) {
-        let activeWathUser = ActiveBathUser(name: userName)
+    func createWathActiveUser(user: User) {
+        let activeWathUser = ActiveBathUser(name: user.name)
         self.activeUserService.createActiveWathUser(isActiveUser: activeWathUser, completion: { result in
             switch result {
             case .success:

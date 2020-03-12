@@ -16,4 +16,8 @@ final class NameCell: UITableViewCell, CellReusable {
         super.awakeFromNib()
         // Initialization code
     }
+
+    func setData(name: String) {
+        nameLavel.text = name
+    }
 }
