@@ -13,7 +13,11 @@ protocol HomePresenter: class {
     func setUserName()
     func makeBathActiveUser()
     func makeWathActiveUser()
+    func displayBathActiveUser()
+    func displayWathActiveUser()
     var sections: [String] { get }
+    var isActiveBathUser: [ActiveBathUser]? { get }
+    var isActiveWathUser: [ActiveWathUser]? { get }
 }
 
 enum HomeTableViewActiveCellType: Int {
@@ -28,9 +32,36 @@ final class HomeViewPresenter: HomePresenter {
     private var userService = UserService()
     private var activeUserService = ActiveUserService()
     var me: User?
+    var isActiveWathUser: [ActiveWathUser]?
+    var isActiveBathUser: [ActiveBathUser]?
 
     init(view: HomeView) {
         self.view = view
+    }
+
+    func displayBathActiveUser() {
+        activeUserService.getActiveBathUserReF(/*limit: 5,*/ completion: { result in
+            switch result {
+            case .success(let isActiveUser):
+                self.isActiveBathUser = isActiveUser
+                self.view?.reloadTable()
+                print(result, "result")
+            case .failure:
+                print("何様？？")
+            }
+        })
+    }
+
+    func displayWathActiveUser() {
+        activeUserService.getActiveWathUser(completiom: { result in
+            switch result {
+            case .success(let isActiveUser):
+                self.isActiveWathUser = isActiveUser
+                self.view?.reloadTable()
+            case .failure:
+                print("ふざけるな")
+            }
+        })
     }
 
     func makeWathActiveUser() {
@@ -63,7 +94,7 @@ final class HomeViewPresenter: HomePresenter {
             switch result {
             case .success:
                 // TODO:　アラートの処理を追加すること
-                print("できてるよ")
+                print("result", result)
             case .failure:
                 print("Failed to update")
             }
