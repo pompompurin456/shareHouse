@@ -10,7 +10,6 @@ import Foundation
 import FirebaseAuth
 
 protocol HomePresenter: class {
-    func setUserName()
     func makeBathActiveUser()
     func makeWathActiveUser()
     func displayBathActiveUser()
@@ -18,11 +17,8 @@ protocol HomePresenter: class {
     var sections: [String] { get }
     var isActiveBathUser: [ActiveBathUser]? { get }
     var isActiveWathUser: [ActiveWathUser]? { get }
-}
-
-enum HomeTableViewActiveCellType: Int {
-    case activeBathCell
-    case activeWathCell
+    var numberOfRowInSectionBath: Int { get }
+    var numberOfRowInSectionWath: Int { get }
 }
 
 final class HomeViewPresenter: HomePresenter {
@@ -32,11 +28,15 @@ final class HomeViewPresenter: HomePresenter {
     private var userService = UserService()
     private var activeUserService = ActiveUserService()
     var me: User?
+    var numberOfRowInSectionBath: Int
+    var numberOfRowInSectionWath: Int
     var isActiveWathUser: [ActiveWathUser]?
     var isActiveBathUser: [ActiveBathUser]?
 
     init(view: HomeView) {
         self.view = view
+        self.numberOfRowInSectionBath = 5
+        self.numberOfRowInSectionWath = 5
     }
 
     func displayBathActiveUser() {
@@ -44,6 +44,7 @@ final class HomeViewPresenter: HomePresenter {
             switch result {
             case .success(let isActiveUser):
                 self.isActiveBathUser = isActiveUser
+                self.analyesActiveBathUser()
                 self.view?.reloadTable()
                 print(result, "result")
             case .failure:
@@ -57,6 +58,7 @@ final class HomeViewPresenter: HomePresenter {
             switch result {
             case .success(let isActiveUser):
                 self.isActiveWathUser = isActiveUser
+                self.analyesActiveWathUser()
                 self.view?.reloadTable()
             case .failure:
                 print("ふざけるな")
@@ -101,7 +103,7 @@ final class HomeViewPresenter: HomePresenter {
         })
     }
 
-    func createWathActiveUser(user: User) {
+    private func createWathActiveUser(user: User) {
         let activeWathUser = ActiveBathUser(name: user.name)
         self.activeUserService.createActiveWathUser(isActiveUser: activeWathUser, completion: { result in
             switch result {
@@ -114,17 +116,16 @@ final class HomeViewPresenter: HomePresenter {
         })
     }
 
+    private func analyesActiveBathUser() {
+        guard let rowNumberAtSection = isActiveBathUser?.count else { return }
+        numberOfRowInSectionBath = rowNumberAtSection
+        print(numberOfRowInSectionBath)
+    }
 
-    func setUserName() {
-        guard let firUser = Auth.auth().currentUser else { return }
-        userService.getUser(firUid: firUser.uid) { result in
-            switch result {
-            case .success(let user):
-                // TODO:　アラートの処理を追加すること
-                UserData.Name = user.name
-            case .failure:
-                self.view?.showEroorUpdateAlert()
-            }
-        }
+    private func analyesActiveWathUser() {
+        guard let rowNumberAtSection = isActiveWathUser?.count else { return }
+        numberOfRowInSectionWath = rowNumberAtSection
+        print(numberOfRowInSectionWath)
     }
 }
+

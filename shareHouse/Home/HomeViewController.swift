@@ -22,15 +22,16 @@ final class HomeViewController: UIViewController, HomeView {
     @IBOutlet weak var mainTableView: UITableView!
 
     private let userService = UserService()
+    var isActiveWathUser: [ActiveWathUser]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Home"
         setupNavigationController()
-        setUpTableView()
         presenter.displayBathActiveUser()
         presenter.displayWathActiveUser()
+        setUpTableView()
     }
     
     @objc private func presentAddView() {
@@ -111,11 +112,18 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        //        switch section {
+        //        case 0:
+        //            return presenter.numberOfRowInSectionBath
+        //        case 1:
+        //            return presenter.numberOfRowInSectionWath
+        //        default:
+        return 5
+        //        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return presenter.sections.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,15 +131,21 @@ extension HomeViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             if let isActiveBathUsers = presenter.isActiveBathUser {
-                cell.setData(name: isActiveBathUsers[indexPath.row].name)
+                cell.setData(name: isActiveBathUsers[indexPath.row].name, number: String(indexPath.row + 1))
+            } else {
+                cell.setData(name: "誰もいないよ！", number: String(indexPath.row + 1))
             }
+
         case 1:
             if let isActiveWathUser = presenter.isActiveWathUser {
-                cell.setData(name: isActiveWathUser[indexPath.row].name)
+                cell.setData(name: isActiveWathUser[indexPath.row].name, number: String(indexPath.row + 1))
+            } else {
+                cell.setData(name: "誰もいないよ！", number: String(indexPath.row + 1))
             }
+
         default:
             break
         }
-         return cell
+        return cell
     }
 }
