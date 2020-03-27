@@ -18,6 +18,7 @@
 		0D3D994D23EE94C90020F595 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0D3D994C23EE94C90020F595 /* GoogleService-Info.plist */; };
 		0D3D995523EEA37F0020F595 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3D995423EEA37F0020F595 /* AddViewController.swift */; };
 		0D3D995723EEA3940020F595 /* AddViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D3D995623EEA3940020F595 /* AddViewController.storyboard */; };
+		0D52DFFF242DD63C005F7C62 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52DFFE242DD63C005F7C62 /* UIViewController+Alert.swift */; };
 		0D545C8423F669D200915D56 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D545C8323F669D200915D56 /* UserManager.swift */; };
 		0D545C8923F6703B00915D56 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D545C8823F6703B00915D56 /* Result.swift */; };
 		0D545C9123F7FD5700915D56 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D545C9023F7FD5700915D56 /* User.swift */; };
@@ -68,6 +69,7 @@
 		0D3D994C23EE94C90020F595 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0D3D995423EEA37F0020F595 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		0D3D995623EEA3940020F595 /* AddViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddViewController.storyboard; sourceTree = "<group>"; };
+		0D52DFFE242DD63C005F7C62 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Alert.swift"; path = "shareHouse/Extension/UIViewController+Alert.swift"; sourceTree = SOURCE_ROOT; };
 		0D545C8323F669D200915D56 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		0D545C8823F6703B00915D56 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		0D545C9023F7FD5700915D56 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		0DF74DD8240507FA00FA2110 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0D52DFFE242DD63C005F7C62 /* UIViewController+Alert.swift */,
 				0DF74DD62404F37F00FA2110 /* DocumentSnapshot+.swift */,
 			);
 			path = Extension;
@@ -487,6 +490,7 @@
 				0DF74DD72404F37F00FA2110 /* DocumentSnapshot+.swift in Sources */,
 				0D3D991D23EE91F40020F595 /* SceneDelegate.swift in Sources */,
 				0DF74DD52404B97200FA2110 /* FirestoreModel.swift in Sources */,
+				0D52DFFF242DD63C005F7C62 /* UIViewController+Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

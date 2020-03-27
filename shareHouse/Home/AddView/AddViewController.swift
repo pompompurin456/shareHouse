@@ -52,17 +52,19 @@ final class AddViewController: UIViewController, AddView {
 
     //    ここのアラートの処理は共有化することができる
     private func userCreate() {
-        let alertController = UIAlertController(title: "名前を送信", message: "ユーザーを登録しますか？？", preferredStyle: .alert)
+//        let alertController = UIAlertController(title: "名前を送信", message: "ユーザーを登録しますか？？", preferredStyle: .alert
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { _ in
-            alertController.dismiss(animated: true, completion: nil)
+//            alertController.dismiss(animated: true, completion: nil)
         }
         let sendAction = UIAlertAction(title: "送信", style: .default) { _ in
             self.createUserPresent()
         }
-        alertController.addAction(cancelAction)
-        alertController.addAction(sendAction)
 
-        present(alertController, animated: true)
+        showActionAlert(title: "名前を送信", message: "ユーザーを登録しますか？？", actions: [cancelAction, sendAction])
+//        alertController.addAction(cancelAction)
+//        alertController.addAction(sendAction)
+//
+//        present(alertController, animated: true)
     }
     private func createUserPresent() {
         guard let name = nameTextField.text else { return }
