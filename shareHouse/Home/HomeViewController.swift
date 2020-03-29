@@ -21,16 +21,23 @@ final class HomeViewController: UIViewController, HomeView {
     
     @IBOutlet weak var mainTableView: UITableView!
 
+//    private var bathCellItem: [ActiveBathUser] = []
+//    private var wathCellItem: [ActiveWathUser] = []
     private let userService = UserService()
+    //    private let activeUser = ActiveUserService()
+    var isActiveWathUser: [ActiveWathUser]?
+    var isActiveBathUser: [ActiveBathUser]?
+    var deletID = ""
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Home"
         setupNavigationController()
-        setUpTableView()
         presenter.displayBathActiveUser()
         presenter.displayWathActiveUser()
+        setUpTableView()
     }
     
     @objc private func presentAddView() {
@@ -100,7 +107,9 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            presenter.makeBathActiveUser()
+            print("OK")
+            //            presenter.deleteActiveBathUser()
+        //            presenter.makeBathActiveUser()
         case 1:
             presenter.makeWathActiveUser()
         default:
@@ -111,27 +120,93 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch section {
+        case 0:
+            if presenter.numberOfRowInSectionBath != 0 {
+                return presenter.numberOfRowInSectionBath
+            } else {
+                return 5
+            }
+        case 1:
+            if presenter.numberOfRowInSectionWath != 0 {
+                return presenter.numberOfRowInSectionWath
+            } else {
+                return 5
+            }
+        default:
+            return 5
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return presenter.sections.count
     }
 
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            if editingStyle == UITableViewCell.EditingStyle.delete {
+//                let bathCellItem = isActiveBathUser?[indexPath.row]
+//                print(bathCellItem)
+//                self.isActiveBathUser?.remove(at: indexPath.row)
+//                tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+                print("indexPath.item", indexPath.item)
+                presenter.deleteActiveBathUser()
+                print("Fuuu")
+            }
+
+        default:
+            break
+        }
+    }
+    //
+    //        func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    //            let delete = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completionHandler in
+    //                guard let self = self  else {
+    //                    return
+    //                }
+    //
+    //                switch indexPath.section {
+    //                case 0:
+    //                    guard let cellItem = self.isActiveBathUser?[indexPath.row] else { return }
+    //                    self.isActiveBathUser?.remove(at: indexPath.item)
+    //                    tableView.deleteRows(at: [indexPath], with: .automatic)
+    //                    self.presenter.deleteActiveBathUser(item: cellItem)
+    //                    self.reloadTable()
+    //                    print("できてる")
+    //                default:
+    //                    break
+    //                }
+    //            }
+    //            let swipeAction = UISwipeActionsConfiguration(actions: [delete])
+    //            swipeAction.performsFirstActionWithFullSwipe = false
+    //            return swipeAction
+    //        }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(with: NameCell.self, for: indexPath)
         switch indexPath.section {
         case 0:
-            if let isActiveBathUsers = presenter.isActiveBathUser {
-                cell.setData(name: isActiveBathUsers[indexPath.row].name)
+            if presenter.numberOfRowInSectionBath != 0 {
+                if let isActiveBathUsers = presenter.isActiveBathUser {
+                    cell.setData(name: isActiveBathUsers[indexPath.row].name, number: String(indexPath.row + 1))
+                }
+                else if presenter.numberOfRowInSectionBath == 0 {
+                    cell.setData(name: "誰もいないよ！", number: String(indexPath.row + 1))
+                }
             }
         case 1:
-            if let isActiveWathUser = presenter.isActiveWathUser {
-                cell.setData(name: isActiveWathUser[indexPath.row].name)
+            if presenter.numberOfRowInSectionWath != 0 {
+                if let isActiveWathUser = presenter.isActiveWathUser {
+                    cell.setData(name: isActiveWathUser[indexPath.row].name, number: String(indexPath.row + 1))
+
+                } else if presenter.numberOfRowInSectionWath == 0 {
+                    cell.setData(name: "誰もいないよ！", number: String(indexPath.row + 1))
+                }
             }
         default:
             break
         }
-         return cell
+        return cell
     }
 }

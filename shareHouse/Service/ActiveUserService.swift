@@ -77,4 +77,16 @@ class ActiveUserService {
             }
         }
     }
+
+    func deleteActiveBathUser(/*firUid: String,*/ completion: @escaping (Result<Bool, FirestoreError>) -> Void) {
+        db.collection("activeBathUser").document().delete() { error in
+            if error != nil {
+                completion(.failure(.other))
+                return
+            } else {
+                completion(.success(true))
+                print("completion", completion)
+            }
+        }
+    }
 }

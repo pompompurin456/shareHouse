@@ -11,13 +11,15 @@ import UIKit
 
 final class NameCell: UITableViewCell, CellReusable {
     @IBOutlet weak var nameLavel: UILabel!
-
+    @IBOutlet weak var numberLavel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func setData(name: String) {
+    func setData(name: String, number: String) {
         nameLavel.text = name
+        numberLavel.text = number
     }
 }
