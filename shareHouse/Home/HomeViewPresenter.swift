@@ -15,6 +15,7 @@ protocol HomePresenter: class {
     func displayBathActiveUser()
     func displayWathActiveUser()
     var sections: [String] { get }
+    func deleteActiveBathUser()
     var isActiveBathUser: [ActiveBathUser]? { get }
     var isActiveWathUser: [ActiveWathUser]? { get }
     var numberOfRowInSectionBath: Int { get }
@@ -87,6 +88,21 @@ final class HomeViewPresenter: HomePresenter {
             case .failure:
                 print("NO")
             }
+        }
+    }
+
+    func deleteActiveBathUser() {
+        guard let firUser = Auth.auth().currentUser else { return }
+        print("firUser", firUser)
+        activeUserService.deleteActiveBathUser(/*firUid: firUser.uid*/) { result in
+            switch result {
+            case .success:
+                self.view?.reloadTable()
+                print("綺麗になりました")
+            case .failure:
+                print("綺麗になりませんでした")
+            }
+            print(result)
         }
     }
 
